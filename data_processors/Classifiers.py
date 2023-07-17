@@ -2,6 +2,9 @@ from abc import abstractmethod, ABC
 
 from transformers import pipeline
 import numpy as np
+import torch
+
+DEVICE = "cuda" if torch.torch.cuda.is_available() else "cpu"
 
 
 class Classifer(ABC):
@@ -29,7 +32,7 @@ class Classifer(ABC):
 class ZeroShotClassifer(Classifer):
     def __init__(self) -> None:
         super().__init__()
-        self.pipe = pipeline(model="facebook/bart-large-mnli")
+        self.pipe = pipeline(model="facebook/bart-large-mnli", device=DEVICE)
 
     def classify(self, text):
         answer = self.pipe(text, candidate_labels=list(self._categories))
