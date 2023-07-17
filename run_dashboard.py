@@ -36,7 +36,7 @@ options = st.multiselect(
     ],
 )
 
-classifier.categories(options)
+classifier.set_categories(options)
 
 start_date = col1.date_input("Select start date", min_date)
 end_date = col2.date_input("Select end date", max_date)

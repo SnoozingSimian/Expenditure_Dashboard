@@ -14,12 +14,12 @@ class Classifer(ABC):
         return self._categories
 
     @categories.setter
-    def categories(self, **kwargs):
+    def set_categories(self, **kwargs):
         for k, v in kwargs.items():
             self._categories.add(v)
 
     @categories.deleter
-    def categories(self, category):
+    def del_categories(self, category):
         self._categories.remove(category)
 
     @abstractmethod
