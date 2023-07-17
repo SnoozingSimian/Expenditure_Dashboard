@@ -20,8 +20,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-col1, col2, _, _, _, _ = st.columns(6)
-
 st.sidebar.header("Expenditure Categories")
 options = st.sidebar.multiselect(
     "**Select Expenditure Categories**",
@@ -37,11 +35,12 @@ options = st.sidebar.multiselect(
     ],
 )
 
+col1, col2 = st.sidebar.columns(2)
+start_date = col1.date_input("Select start date", min_date)
+end_date = col2.date_input("Select end date", max_date)
+
 if st.button("Build Dataframe"):
     classifier.categories = options
-
-    start_date = col1.date_input("Select start date", min_date)
-    end_date = col2.date_input("Select end date", max_date)
 
     df = df[start_date:end_date]
 

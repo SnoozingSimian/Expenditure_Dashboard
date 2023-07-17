@@ -32,7 +32,7 @@ class ZeroShotClassifer(Classifer):
         self.pipe = pipeline(model="facebook/bart-large-mnli")
 
     def classify(self, text):
-        answer = self.pipe(text, candidate_labels=self._categories)
+        answer = self.pipe(text, candidate_labels=list(self._categories))
 
         i = np.argmax(answer["scores"])
         return answer["labels"][i]
