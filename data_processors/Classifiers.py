@@ -4,7 +4,7 @@ from transformers import pipeline
 import numpy as np
 import torch
 
-DEVICE = "cuda" if torch.torch.cuda.is_available() else "cpu"
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 class Classifer(ABC):
