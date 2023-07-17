@@ -22,7 +22,8 @@ st.markdown(
 
 col1, col2, _, _, _, _ = st.columns(6)
 
-options = st.multiselect(
+st.sidebar.header("Expenditure Categories")
+options = st.sidebar.multiselect(
     "**Select Expenditure Categories**",
     [
         "Transport",
@@ -36,122 +37,123 @@ options = st.multiselect(
     ],
 )
 
-classifier.set_categories(options)
+if st.button("Build Dataframe"):
+    classifier.categories = options
 
-start_date = col1.date_input("Select start date", min_date)
-end_date = col2.date_input("Select end date", max_date)
+    start_date = col1.date_input("Select start date", min_date)
+    end_date = col2.date_input("Select end date", max_date)
 
-df = df[start_date:end_date]
+    df = df[start_date:end_date]
 
-categories = []
-for i, row in df.iterrows():
-    categories.append(classifier.classify(row["Description"]))
+    categories = []
+    for i, row in df.iterrows():
+        categories.append(classifier.classify(row["Description"]))
 
-df["Categories"] = categories
+    df["Categories"] = categories
 
-st.write(df)
+    st.write(df)
 
-"""General Categories
-Housing
+# """General Categories
+# Housing
 
-Mortgage or rent
-Property taxes
-Household repairs
-HOA fees
-Transportation
+# Mortgage or rent
+# Property taxes
+# Household repairs
+# HOA fees
+# Transportation
 
-Car payment
-Car warranty
-Gas
-Tires
-Maintenance and oil changes
-Parking fees
-Repairs
-Registration and DMV Fees
-Food
+# Car payment
+# Car warranty
+# Gas
+# Tires
+# Maintenance and oil changes
+# Parking fees
+# Repairs
+# Registration and DMV Fees
+# Food
 
-Groceries
-Restaurants
-Pet food
-Utilities
+# Groceries
+# Restaurants
+# Pet food
+# Utilities
 
-Electricity
-Water
-Garbage
-Phones
-Cable
-Internet
-Clothing
+# Electricity
+# Water
+# Garbage
+# Phones
+# Cable
+# Internet
+# Clothing
 
-Adults’ clothing
-Adults’ shoes
-Children’s clothing
-Children’s shoes
-Medical/Healthcare
+# Adults’ clothing
+# Adults’ shoes
+# Children’s clothing
+# Children’s shoes
+# Medical/Healthcare
 
-Primary care
-Dental care
-Specialty care (dermatologists, orthodontics, optometrists, etc.)
-Urgent care
-Medications
-Medical devices
-Insurance
+# Primary care
+# Dental care
+# Specialty care (dermatologists, orthodontics, optometrists, etc.)
+# Urgent care
+# Medications
+# Medical devices
+# Insurance
 
-Health insurance
-Homeowner’s or renter’s insurance
-Home warranty or protection plan
-Auto insurance
-Life insurance
-Disability insurance
-Household Items/Supplies
+# Health insurance
+# Homeowner’s or renter’s insurance
+# Home warranty or protection plan
+# Auto insurance
+# Life insurance
+# Disability insurance
+# Household Items/Supplies
 
-Toiletries
-Laundry detergent
-Dishwasher detergent
-Cleaning supplies
-Tools
-Personal
+# Toiletries
+# Laundry detergent
+# Dishwasher detergent
+# Cleaning supplies
+# Tools
+# Personal
 
-Gym memberships
-Haircuts
-Salon services
-Cosmetics (like makeup or services like laser hair removal)
-Babysitter
-Subscriptions
-Debt
+# Gym memberships
+# Haircuts
+# Salon services
+# Cosmetics (like makeup or services like laser hair removal)
+# Babysitter
+# Subscriptions
+# Debt
 
-Personal loans
-Student loans
-Credit cards
-Retirement
+# Personal loans
+# Student loans
+# Credit cards
+# Retirement
 
-Financial planning
-Investing
-Education
+# Financial planning
+# Investing
+# Education
 
-Children’s college
-Your college
-School supplies
-Books
-Savings
+# Children’s college
+# Your college
+# School supplies
+# Books
+# Savings
 
-Emergency fund
-Big purchases like a new mattress or laptop
-Other savings
-Gifts/Donations
+# Emergency fund
+# Big purchases like a new mattress or laptop
+# Other savings
+# Gifts/Donations
 
-Birthday
-Anniversary
-Wedding
-Christmas
-Special occasion
-Charities
-Entertainment 
+# Birthday
+# Anniversary
+# Wedding
+# Christmas
+# Special occasion
+# Charities
+# Entertainment
 
-Alcohol and/or bars
-Games
-Movies
-Concerts
-Vacations
-Subscriptions (Netflix, Amazon, Hulu, etc.)
-"""
+# Alcohol and/or bars
+# Games
+# Movies
+# Concerts
+# Vacations
+# Subscriptions (Netflix, Amazon, Hulu, etc.)
+# """
