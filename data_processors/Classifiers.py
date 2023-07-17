@@ -33,6 +33,9 @@ class ZeroShotClassifer(Classifer):
     def __init__(self) -> None:
         super().__init__()
         self.pipe = pipeline(model="facebook/bart-large-mnli", device=DEVICE)
+        # self.pipe = pipeline(
+        #     model="sileod/deberta-v3-base-tasksource-nli", device=DEVICE
+        # )
 
     def classify(self, text):
         answer = self.pipe(text, candidate_labels=list(self._categories))
